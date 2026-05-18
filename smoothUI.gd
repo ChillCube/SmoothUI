@@ -64,6 +64,9 @@ func _ready() -> void:
 	
 	_update_position()
 	_update_target_position()
+	
+	if get_parent() is NodeArranger:
+		use_relative_positioning = false
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
