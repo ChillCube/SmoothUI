@@ -32,7 +32,8 @@ push-all-addons
 
 
 ## Used By
-2 other ChillCube addon(s) depend on this:
+3 other ChillCube addon(s) depend on this:
 
+- [1to9NumberDisplay](https://github.com/ChillCube/1to9NumberDisplay)
 - [Godot_SpriteBasedSmoothMenuButton2D](https://github.com/ChillCube/Godot_SpriteBasedSmoothMenuButton2D)
 - [ItemFrame2D](https://github.com/ChillCube/ItemFrame2D)

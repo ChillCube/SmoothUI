@@ -11,7 +11,7 @@ var original_position : Vector2 = Vector2.ZERO
 
 # --- Relative Positioning Logic ---
 @export_group("Relative Positioning")
-@export var use_relative_positioning : bool = true: ## Relative positioning ensures the UI stays on the same spot even when the screens are different.
+@export var use_relative_positioning : bool = false: ## Relative positioning ensures the UI stays on the same spot even when the screens are different.
 	set(val):
 		use_relative_positioning = val
 		_update_position()
