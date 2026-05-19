@@ -52,7 +52,6 @@ func _ready() -> void:
 	
 	# Initialize smooth movement
 	mover = SmoothMovement.init(self)
-	add_child(mover)
 	mover.set("bounce", bounce)
 	mover.set("rotation_on", rotation_on)
 	mover.set("speed", speed)
