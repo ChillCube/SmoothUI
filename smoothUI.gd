@@ -55,7 +55,8 @@ func _ready() -> void:
 	mover.set("bounce", bounce)
 	mover.set("rotation_on", rotation_on)
 	mover.set("speed", speed)
-	mover.tilt_on = false;
+	mover.tilt_on = false
+	mover.scale_on = false
 	
 	# Connect to viewport changes
 	if get_tree() and get_tree().root:
