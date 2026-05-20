@@ -21,6 +21,12 @@ Base class for UI elements with smooth movement and relative positioning
 | **speed** | `float` | `10` | The speed multiplier for the smooth movement transition. |
 | **use_smooth_movement** | `bool` | `true` | Whether to use smooth tweening or instant positioning. |
 
+### 🔔 Signals
+| Signal | Arguments | Description |
+| :--- | :--- | :--- |
+| **position_changed** | `new_position: Vector2` |  Emitted when the movement target changes |
+| **movement_completed** | - |  Emitted once when the element arrives at its target position |
+
 ### 🛠️ Methods
 | Method | Arguments | Returns | Description |
 | :--- | :--- | :--- | :--- |

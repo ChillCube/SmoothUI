@@ -43,9 +43,10 @@ var original_position : Vector2 = Vector2.ZERO
 @export var use_smooth_movement : bool = true ## Whether to use smooth tweening or instant positioning.
 
 var current_off_screen_pixels : Vector2
+var _movement_complete: bool = false
 
-signal position_changed(new_position: Vector2)
-signal movement_completed
+signal position_changed(new_position: Vector2) ## Emitted when the movement target changes
+signal movement_completed ## Emitted once when the element arrives at its target position
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -75,6 +76,12 @@ func _process(_delta: float) -> void:
 	
 	if use_smooth_movement and mover and use_relative_positioning:
 		mover.set("global_target_position", _target_position)
+		var dist = global_position.distance_to(_target_position)
+		if dist < 2.0 and not _movement_complete:
+			movement_completed.emit()
+			_movement_complete = true
+		elif dist >= 2.0:
+			_movement_complete = false
 	elif use_relative_positioning:
 		global_position = _target_position
 
