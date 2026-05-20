@@ -39,6 +39,8 @@ var original_position : Vector2 = Vector2.ZERO
 @export_group("Movement Settings")
 @export var bounce : bool = false ## Enables an elastic bounce effect when the element reaches its target position.
 @export var tilt_on : bool = false;
+@export_range(0.0, 10.0, 0.1) var tilt_strength : float = 1.0 ## How strongly horizontal velocity affects the tilt angle
+@export_range(0.0, 3.14, 0.01) var max_tilt : float = 0.4 ## Maximum tilt angle in radians
 @export var rotation_on : bool = false ## If enabled, the element will slightly tilt/rotate during movement.
 @export var speed : float = 10 ## The speed multiplier for the smooth movement transition.
 @export var use_smooth_movement : bool = true ## Whether to use smooth tweening or instant positioning.
@@ -58,6 +60,8 @@ func _ready() -> void:
 	mover.set("rotation_on", rotation_on)
 	mover.set("speed", speed)
 	mover.tilt_on = tilt_on;
+	mover.tilt_strength = tilt_strength
+	mover.max_tilt = max_tilt;
 	mover.scale_on = false
 	
 	# Connect to viewport changes

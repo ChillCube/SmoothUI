@@ -17,6 +17,8 @@ Base class for UI elements with smooth movement and relative positioning
 | **off_screen_position** | `Vector2` | `Vector2(0.0, 0.6)` | The local offset relative to the anchor point when the element is hidden. |
 | **is_hidden** | `bool` | `false` | If true, the element moves to its off-screen position. |
 | **bounce** | `bool` | `false` | Enables an elastic bounce effect when the element reaches its target position. |
+| **tilt_strength** | `float` | `1.0` | How strongly horizontal velocity affects the tilt angle |
+| **max_tilt** | `float` | `0.4` | Maximum tilt angle in radians |
 | **rotation_on** | `bool` | `false` | If enabled, the element will slightly tilt/rotate during movement. |
 | **speed** | `float` | `10` | The speed multiplier for the smooth movement transition. |
 | **use_smooth_movement** | `bool` | `true` | Whether to use smooth tweening or instant positioning. |
