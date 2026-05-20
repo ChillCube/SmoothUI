@@ -102,35 +102,29 @@ func _update_target_position() -> void:
 	
 	position_changed.emit(_target_position)
 
-func set_visible_position(offset: Vector2) -> void:
-	"""Manually set the visible position offset"""
+func set_visible_position(offset: Vector2) -> void: ## Sets the visible-position offset and refreshes the layout target
 	local_position = offset
 	_update_position()
 
-func set_hidden_position(offset: Vector2) -> void:
-	"""Manually set the hidden position offset"""
+func set_hidden_position(offset: Vector2) -> void: ## Sets the off-screen-position offset and refreshes the layout target
 	off_screen_position = offset
 	_update_position()
 
-func teleport_to_target() -> void:
-	"""Instantly move to the target position without smooth movement"""
+func teleport_to_target() -> void: ## Instantly snaps the element to its target position, bypassing smooth movement
 	if use_relative_positioning:
 		global_position = _target_position
 
-func get_original_position() -> Vector2:
+func get_original_position() -> Vector2: ## Returns the current visible (on-screen) target position in global space
 	return original_position
 
-func get_target_position() -> Vector2:
+func get_target_position() -> Vector2: ## Returns the current movement target position (visible or hidden) in global space
 	return _target_position
 
-func set_movement_enabled(enabled: bool) -> void:
-	"""Enable or disable smooth movement"""
+func set_movement_enabled(enabled: bool) -> void: ## Enables or disables smooth tweening; when false the element jumps instantly to its target
 	use_smooth_movement = enabled
 
-func show_ui() -> void:
-	"""Show the UI element"""
+func show_ui() -> void: ## Moves the element to its visible position by clearing the hidden flag
 	is_hidden = false
 
-func hide_ui() -> void:
-	"""Hide the UI element"""
+func hide_ui() -> void: ## Moves the element to its off-screen position by setting the hidden flag
 	is_hidden = true

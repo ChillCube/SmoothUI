@@ -1,5 +1,5 @@
 # SmoothUI API Reference
-Generated: 2026-05-19
+Generated: 2026-05-20
 
 A base node for smooth UI nodes used by ChillCube
 
@@ -20,6 +20,18 @@ Base class for UI elements with smooth movement and relative positioning
 | **rotation_on** | `bool` | `false` | If enabled, the element will slightly tilt/rotate during movement. |
 | **speed** | `float` | `10` | The speed multiplier for the smooth movement transition. |
 | **use_smooth_movement** | `bool` | `true` | Whether to use smooth tweening or instant positioning. |
+
+### 🛠️ Methods
+| Method | Arguments | Returns | Description |
+| :--- | :--- | :--- | :--- |
+| **set_visible_position()** | `offset: Vector2` | `void` |  Sets the visible-position offset and refreshes the layout target |
+| **set_hidden_position()** | `offset: Vector2` | `void` |  Sets the off-screen-position offset and refreshes the layout target |
+| **teleport_to_target()** | - | `void` |  Instantly snaps the element to its target position, bypassing smooth movement |
+| **get_original_position()** | - | `Vector2` |  Returns the current visible (on-screen) target position in global space |
+| **get_target_position()** | - | `Vector2` |  Returns the current movement target position (visible or hidden) in global space |
+| **set_movement_enabled()** | `enabled: bool` | `void` |  Enables or disables smooth tweening; when false the element jumps instantly to its target |
+| **show_ui()** | - | `void` |  Moves the element to its visible position by clearing the hidden flag |
+| **hide_ui()** | - | `void` |  Moves the element to its off-screen position by setting the hidden flag |
 
 ---
 
