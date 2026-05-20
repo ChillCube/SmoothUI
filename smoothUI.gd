@@ -38,6 +38,7 @@ var original_position : Vector2 = Vector2.ZERO
 
 @export_group("Movement Settings")
 @export var bounce : bool = false ## Enables an elastic bounce effect when the element reaches its target position.
+@export var tilt_on : bool = false;
 @export var rotation_on : bool = false ## If enabled, the element will slightly tilt/rotate during movement.
 @export var speed : float = 10 ## The speed multiplier for the smooth movement transition.
 @export var use_smooth_movement : bool = true ## Whether to use smooth tweening or instant positioning.
@@ -56,7 +57,7 @@ func _ready() -> void:
 	mover.set("bounce", bounce)
 	mover.set("rotation_on", rotation_on)
 	mover.set("speed", speed)
-	mover.tilt_on = false
+	mover.tilt_on = tilt_on;
 	mover.scale_on = false
 	
 	# Connect to viewport changes
