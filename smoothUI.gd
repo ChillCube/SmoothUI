@@ -159,9 +159,27 @@ func despawn() -> void: ## Scales the element to zero then frees it. Call this i
 		return
 	if is_instance_valid(_spawn_tween):
 		_spawn_tween.kill()
+	# Freeze position: stop this node's _process (prevents subclasses from retargeting the
+	# mover) and stop the mover itself so the node holds its current position while scaling.
+	set_process(false)
+	if mover:
+		mover.set_process(false)
+	# Capture tree/viewport now; the node will be invalid inside the callback.
+	var tree := get_tree()
+	var vp := get_viewport()
 	var tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "scale", Vector2.ZERO, 1.0 / despawn_speed)
-	tween.tween_callback(queue_free)
+	tween.tween_callback(func():
+		queue_free()
+		# Re-trigger hover detection one frame after this node is freed so any Area2D
+		# that was blocked by this node's collider can receive mouse_entered.
+		if is_instance_valid(tree) and is_instance_valid(vp):
+			tree.create_timer(0.0).timeout.connect(func():
+				var recheck := InputEventMouseMotion.new()
+				recheck.position = vp.get_mouse_position()
+				vp.push_input(recheck)
+			)
+	)
 
 func _play_spawn_animation() -> void:
 	var target_scale := scale
