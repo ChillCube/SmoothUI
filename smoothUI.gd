@@ -36,6 +36,14 @@ var original_position : Vector2 = Vector2.ZERO
 		is_hidden = val
 		_update_target_position()
 
+@export_group("Spawn Animation")
+@export var spawn_animation : bool = true ## If true, the element scales from 0 to its original scale when it first appears.
+@export var spawn_speed : float = 12.0 ## Controls how fast the scale-in animation plays.
+
+@export_group("Despawn Animation")
+@export var despawn_animation : bool = true ## If true, despawn() scales the element to 0 before freeing it.
+@export var despawn_speed : float = 12.0 ## Controls how fast the scale-out animation plays.
+
 @export_group("Movement Settings")
 @export var bounce : bool = false ## Enables an elastic bounce effect when the element reaches its target position.
 @export var tilt_on : bool = false;
@@ -47,6 +55,7 @@ var original_position : Vector2 = Vector2.ZERO
 
 var current_off_screen_pixels : Vector2
 var _movement_complete: bool = false
+var _spawn_tween : Tween
 
 signal position_changed(new_position: Vector2) ## Emitted when the movement target changes
 signal movement_completed ## Emitted once when the element arrives at its target position
@@ -70,7 +79,10 @@ func _ready() -> void:
 	
 	_update_position()
 	_update_target_position()
-	
+
+	if spawn_animation:
+		call_deferred("_play_spawn_animation")
+
 	if get_parent() is NodeArranger:
 		use_relative_positioning = false
 
@@ -140,3 +152,19 @@ func show_ui() -> void: ## Moves the element to its visible position by clearing
 
 func hide_ui() -> void: ## Moves the element to its off-screen position by setting the hidden flag
 	is_hidden = true
+
+func despawn() -> void: ## Scales the element to zero then frees it. Call this instead of queue_free() on SmoothUI nodes.
+	if not despawn_animation or Engine.is_editor_hint():
+		queue_free()
+		return
+	if is_instance_valid(_spawn_tween):
+		_spawn_tween.kill()
+	var tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "scale", Vector2.ZERO, 1.0 / despawn_speed)
+	tween.tween_callback(queue_free)
+
+func _play_spawn_animation() -> void:
+	var target_scale := scale
+	scale = Vector2.ZERO
+	_spawn_tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_spawn_tween.tween_property(self, "scale", target_scale, 1.0 / spawn_speed)
