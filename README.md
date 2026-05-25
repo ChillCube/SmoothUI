@@ -27,8 +27,3 @@ remove-gd-addon SmoothUI
 ```bash
 push-all-addons
 ```
-
-## Used By
-1 other ChillCube addon(s) depend on this:
-
-- [SelectableUI](https://github.com/ChillCube/SelectableUI)
