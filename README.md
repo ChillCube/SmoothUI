@@ -31,4 +31,4 @@ push-all-addons
 ## Used By
 1 other ChillCube addon(s) depend on this:
 
-- [1to9NumberDisplay](https://github.com/ChillCube/1to9NumberDisplay)
+- [SelectableUI](https://github.com/ChillCube/SelectableUI)
