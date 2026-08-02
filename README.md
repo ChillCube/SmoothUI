@@ -36,7 +36,6 @@ push-all-addons
 - [SmoothMovement](https://github.com/ChillCube/Godot_SmoothMovement)
 
 ## Used By
-2 other ChillCube addon(s) depend on this:
+1 other ChillCube addon(s) depend on this:
 
 - [1to9NumberDisplay](https://github.com/ChillCube/1to9NumberDisplay)
-- [SelectableUI](https://github.com/ChillCube/SelectableUI)
